@@ -1,0 +1,63 @@
+[course]
+number = "CE-4204"
+section = "001"
+name = "Electrical and Computer Engineering Laboratory in Devices"
+instructor = {name = "Chadwin Young", email = "Chadwin.Young@utdallas.edu"}
+
+[[course.teaching-assistant]]
+name = "Milad Daneshnazar"
+email = "Milad.Daneshnazar@UTDallas.edu"
+
+[[course.teaching-assistant]]
+name = "Colby Jones"
+email = "Colby.Jones@UTDallas.edu"
+
+[[authors]]
+name = "Minh Nguyen"
+email = "Minh.Nguyen7@UTDallas.edu"
+
+[[authors]
+name = "Shaswat Aryal"
+email = "Shaswat.Aryal@UTDallas.edu"
+
+[[authors]]
+name = "Christina Botello"
+email = "Christina.Botello@UTDallas.edu"
+
+[[authors]]
+name = "Afreen Khazi-Syed"
+email = "Afreen.Khazi-Syed@UTDallas.edu"
+
+# It's important that these are in order, the first lab is the first one
+# declared here!
+[[lab]]
+title = "Silicon Diode I-V Characteristics and Ideality Factor"
+date = { performed = "February 13, 2026", due = "February 20, 2026" }
+
+[[lab]]
+title = "MOSFET I-V Characteristics and Parameter Extraction (PE)"
+date = { performed = "February 27, 2026", due = "March 6, 2026" }
+
+[[lab]]
+title = "Basic MOS C-V Measurements and PE"
+date = { performed = "March 6, 2026", due = "March 13, 2026" }
+
+[[lab]]
+title = "Advanced MOS C-V Measurements and PE"
+date = { performed = "March 13, 2026", due = "March 26, 2026" }
+
+[[lab]]
+title = "MOSFET Mobility Extraction"
+date = { performed = "March 20, 2026", due = "April 5, 2026" }
+
+[[lab]]
+title = "Charge Pumping"
+date = { performed = "April 10, 2026", due = "April 18, 2026" }
+
+[[lab]]
+title = "Pulsed I-V"
+date = { performed = "April 17, 2026", due = "April 25, 2026" }
+
+[[lab]]
+title = "MOSFET Bias Temperature Instability"
+date = { performed = "April 24, 2026", due = "May 3, 2026" }

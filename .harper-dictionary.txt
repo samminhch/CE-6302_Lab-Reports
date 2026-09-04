@@ -1,0 +1,13 @@
+EOT
+Eeff
+Matthiessan
+NBTI
+PBTI
+Transconductance
+Vg
+dopants
+filter-only-floats
+flatband
+interfacial
+meff
+subthreshold
