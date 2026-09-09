@@ -36,7 +36,7 @@
     title: (fonts: "Calistoga"),
     heading: (fonts: "Calistoga"),
     body: (fonts: ("Comic Neue")),
-    mono: (fonts: "Maple Mono"),
+    mono: (fonts: "Maple Mono NF"),
     math: (fonts: ("Fira Math", "New Computer Modern Math")),
   ),
   date: current-lab.date.display(),

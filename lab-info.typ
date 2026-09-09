@@ -10,7 +10,7 @@
 
 #let authors = (
   (name: "Minh Nguyen", email: "mdn220004@utdallas.edu"),
-  (name: "someone", email: "someone@utdallas.edu"),
+  (name: "Noya Azeem", email: "nxa190019@utdallas.edu"),
 )
 
 #let lab = (
