@@ -1,0 +1,9 @@
+default_profile: lab01
+
+profiles:
+  lab01:
+    notes: EEDG/CE6302 Lab 01 - Reading the Joystick and Displaying on the LCD
+    fqbn: energia:msp432:MSP-EXP432P401R
+    platforms:
+      - platform: energia:msp432 (5.30.0)
+        platform_index_url: https://github.com/Andy4495/TI_Platform_Cores_For_Arduino/raw/refs/heads/main/json/package_energia_optimized_index.json
