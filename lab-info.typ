@@ -4,13 +4,14 @@
   name: "Embedded Systems",
   instructor: (name: "Tooraj Nikoubin", email: "Tooraj.Nikoubin@utdallas.edu"),
   teaching-assistants: (
-    (name: "Someone", email: "someone@utdallas.edu"),
+    (name: "Saeed Hashemi", email: "Saeed.Hashemi@utdallas.edu"),
   ),
 )
 
+#let group = 1
 #let authors = (
   (name: "Minh Nguyen", email: "mdn220004@utdallas.edu"),
-  (name: "Noya Azeem", email: "nxa190019@utdallas.edu"),
+  (name: "Noya Azeemm", email: "nxa190019xa190019@utdallas.edu"),
 )
 
 #let lab = (

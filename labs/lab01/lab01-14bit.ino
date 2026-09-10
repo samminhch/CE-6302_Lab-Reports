@@ -7,7 +7,7 @@ const int ypin = 26;  // joystick Y
 
 // ---- STEP 3: add the joystick range constants here ----
 const int RAW_MIN = 1000;
-const int RAW_MAX = 3000;
+const int RAW_MAX = 15000;
 
 // ---- STEP 2: add the pad() helper function here ----
 // add spaces so every number takes the same width on screen
@@ -29,7 +29,7 @@ void setup() {
 
   // ---- STEP 2: write the X and Y labels here ----
   Serial.begin(9600);
-  analogReadResolution(12); // Update resolution here
+  analogReadResolution(14); // Update resolution here
 
   // ---- STEP 3: write the column headings here ----
   myScreen.gText(5, 25, "raw   0-9", greenColour);

@@ -24,21 +24,44 @@
 )
 
 #import "lib/template.typ": *
-#import "@local/templates:0.2.3": undergrad-lab-report
+#import "@local/templates:0.2.4": undergrad-lab-report
 #show: undergrad-lab-report.with(
   title: current-lab.title,
   subtitle: [Lab \##lab-number],
+  group: lab-info.group,
   authors: authors,
   instructor: course.instructor,
   teaching-assistants: course.teaching-assistants,
   course: course,
   styles: (
-    title: (fonts: "Calistoga"),
-    heading: (fonts: "Calistoga"),
-    body: (fonts: ("Comic Neue")),
-    mono: (fonts: "Maple Mono NF"),
-    math: (fonts: ("Fira Math", "New Computer Modern Math")),
+    title: (fonts: "Calistoga", size: 2em, weight: "bold"),
+    body: (fonts: "Comic Neue", size: 12pt, weight: "regular"),
+    mono: (
+      fonts: ("Maple Mono NF", "Maple Mono"),
+      size: 1em,
+      weight: "regular",
+    ),
+    math: (
+      fonts: ("Fira Math", "New Computer Modern Math"),
+      size: 1em,
+      weight: "regular",
+    ),
   ),
-  date: current-lab.date.display(),
+  date: current-lab.date,
 )
-#include "reports/lab-" + str(lab-number) + ".typ"
+
+#show link: it => {
+  set text(fill: blue)
+  underline[#it]
+}
+#show ref: it => strong(it)
+
+#{
+  lab-number = if lab-number < 10 {
+    "0" + str(lab-number)
+  } else {
+    str(lab-number)
+  }
+
+  include "reports/lab-" + lab-number + ".typ"
+}
