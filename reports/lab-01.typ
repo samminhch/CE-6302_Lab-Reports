@@ -53,7 +53,13 @@ resolution to observe and compare readings. The nominal (centered) values of the
 @figure:nominal-14bit.
 
 #figure(
-  image("../assets/lab01/nominal-12bit.png", width: 60%),
+  rotate(-90deg, image("../assets/lab01/output.jpg", width: 2.5in), reflow: true),
+  caption: [LCD output: title displays "Joystick", contains raw analog data and
+    scaled values from 0-9],
+)<figure:lcd-output>
+
+#figure(
+  image("../assets/lab01/nominal-12bit.png", height: 30%),
   caption: [Nominal values of the joystick for 12-bit resolution],
 )<figure:nominal-12bit>
 
@@ -99,6 +105,14 @@ the serial monitor was already showing and recording. We were able to
 successfully display and read the live joystick values and as a result map them
 to a 0-9 scale using the ```cpp constrain() ``` function. Therefore, the effects
 of the ADC resolution were achieved and observed thoroughly.
+
+== Conclusion
+
+The lab helped us successfully understand how joystick movement can be observed
+and read using the ADC and then further displayed on the LCD. We also
+accomplished an understanding of how the map () and constrain () functions were
+used to convert the raw readings to a much more simpler and controlled range of
+0-9.
 
 #set heading(numbering: none)
 

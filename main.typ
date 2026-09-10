@@ -33,20 +33,6 @@
   instructor: course.instructor,
   teaching-assistants: course.teaching-assistants,
   course: course,
-  styles: (
-    title: (fonts: "Calistoga", size: 2em, weight: "bold"),
-    body: (fonts: "Comic Neue", size: 12pt, weight: "regular"),
-    mono: (
-      fonts: ("Maple Mono NF", "Maple Mono"),
-      size: 1em,
-      weight: "regular",
-    ),
-    math: (
-      fonts: ("Fira Math", "New Computer Modern Math"),
-      size: 1em,
-      weight: "regular",
-    ),
-  ),
   date: current-lab.date,
 )
 
@@ -55,6 +41,7 @@
   underline[#it]
 }
 #show ref: it => strong(it)
+#set heading(numbering: "1.")
 
 #{
   lab-number = if lab-number < 10 {
