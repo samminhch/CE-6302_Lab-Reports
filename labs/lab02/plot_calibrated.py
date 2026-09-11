@@ -1,7 +1,10 @@
 import serial
+import matplotlib
+
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
-PORT = ""
+PORT = "/dev/ttyACM0"
 BAUD = 115200
 L = 2
 
@@ -37,7 +40,11 @@ with serial.Serial(PORT, BAUD) as ser:
         # ---- STEP 1: split the line and convert the first three
         #              fields into ax_c, ay_c, and az_c
         line = ser.readline().decode(errors="ignore").strip()
-        ax_g, ay_g, az_g, flag = tuple(map(int, line.split(",")))
+        parts = line.split(",")
+        if len(parts) != 4:
+            continue
+        ax_g, ay_g, az_g, flag = tuple(map(float, parts))
+        flag = flag == 1
 
         if any(abs(v) > 8 for v in (ax_g, ay_g, az_g)):
             continue
@@ -48,9 +55,9 @@ with serial.Serial(PORT, BAUD) as ser:
         arrow = ax.quiver(0, 0, 0, ax_g, ay_g, az_g, linewidth=3)
         mag = (ax_g**2 + ay_g**2 + az_g**2) ** 0.5
 
-        ax.set_title(
-            f"|a| = {mag:.2f} g" + "\tFALL DETECTED" if flag else "",
-            color="r" if flag else "k",
-        )
+        if not flag:
+            ax.set_title(f"(X, Y, Z) = ({ax_g:.3f}, {ay_g:.3f}, {az_g:.3f})    |a| = {mag:.2f}", color="k")
+        else:
+            ax.set_title(f"|a| = {mag:.2f}    FALL DETECTED", color="r")
 
         plt.pause(0.01)

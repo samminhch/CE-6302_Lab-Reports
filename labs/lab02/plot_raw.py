@@ -1,7 +1,9 @@
 import serial
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
-PORT=""
+PORT="/dev/ttyACM0"
 BAUD=115200
 L = (1 << 12) - 1
 
@@ -37,7 +39,10 @@ with serial.Serial(PORT, BAUD) as ser:
         # ---- STEP 1: split the line and convert the first three
         #              fields into ax_c, ay_c, and az_c
         line = ser.readline().decode(errors="ignore").strip()
-        ax_c, ay_c, az_c = tuple(map(int, line.split(",")))
+        parts = line.split(",")
+        if len(parts) != 4:
+            continue
+        ax_c, ay_c, az_c, _ = tuple(map(float, parts))
 
         if not all(0 <= c <= L for c in (ax_c, ay_c, az_c)):
             continue
@@ -46,6 +51,7 @@ with serial.Serial(PORT, BAUD) as ser:
             arrow.remove()
 
         arrow = ax.quiver(0, 0, 0, ax_c, ay_c, az_c, linewidth=3)
-        ax.set_title(f"X = {ax_c:.0f}\tY = {ay_c:.0f}\tZ = {az_c:.0f}\t")
+        mag = (ax_c**2 + ay_c**2 + az_c**2) ** 0.5
+        ax.set_title(f"X = {ax_c:.0f}    Y = {ay_c:.0f}    Z = {az_c:.0f}    mag = {mag:.0f}")
         plt.pause(0.01)
 

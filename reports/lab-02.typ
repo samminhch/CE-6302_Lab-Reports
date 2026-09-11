@@ -40,9 +40,9 @@
       $k$,
     ),
 
-    $X$, ``, ``, ``, ``,
-    $Y$, ``, ``, ``, ``,
-    $Z$, ``, ``, ``, ``,
+    $X$, `2921`, `1286`, `2103.5`, `817.5`,
+    $Y$, `2846`, `1242`, `2,044`, `802`,
+    $Z$, `2878`, `1240`, `2059`, `819`,
   ),
 )<table:calibration-readings>
 
@@ -51,14 +51,12 @@
   table(
     columns: 3,
     common.table-header([Measurement], [Raw (counts)], [Calibrated ($g$)]),
-    [$X$, board flat],
-    ``,
 
-    ``, [$Y$, board flat], ``,
-    ``, [$Z$, board flat], ``,
-    ``, [Length of the vector, board flat], ``,
-    ``, [Length of the vector, tilted], ``,
-    ``,
+    [$X$, board flat], `2098`, `0.03`,
+    [$Y$, board flat], `2180`, `0.067`,
+    [$Z$, board flat], `2882`, `0.043`,
+    [Length of the vector, board flat], `4175`, `0.08`,
+    [Length of the vector, tilted], `3817`, `1.08`,
   ),
 )<table:raw-vs-calibrated>
 
@@ -72,8 +70,9 @@ caption: [Threshold test values and measurements],
       [False alarms observed],
     ),
 
-    $3.00$, $$, $$,
-    $$, $$, $$,
+    $3.00$, $0$, $0$,
+    $2.50$, $3$, $3$,
+    $1.50$, $4$, $4$,
   ),
 )<table:fall-measurements>
 

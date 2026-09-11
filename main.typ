@@ -34,17 +34,8 @@
   teaching-assistants: course.teaching-assistants,
   course: course,
   styles: (
-    title: (fonts: "New Computer Modern", size: 2em, weight: "bold"),
-    body: (fonts: "New Computer Modern", size: 12pt, weight: "regular"),
     mono: (
       fonts: ("Maple Mono NF", "Maple Mono"),
-      size: 1em,
-      weight: "regular",
-    ),
-    math: (
-      fonts: ("New Computer Modern Math"),
-      size: 1em,
-      weight: "regular",
     ),
   ),
   date: current-lab.date,

@@ -2,7 +2,7 @@
 
 Screen_HX8353E myScreen;
 
-const uint16_t sampling_rate = 2;
+const uint16_t sampling_rate = 50;
 const uint16_t sampling_period = 1000 / sampling_rate;
 
 const uint8_t xpin = 23;    // accelerometer X
@@ -11,13 +11,13 @@ const uint8_t zpin = 25;    // accelerometer Z
 const uint8_t buzzer = 40;  // BoosterPack buzzer, header J4.40
 
 // ---- STEP 2: add your calibration constants here ----
-const float X_ZERO = 0, X_COUNTS_PER_G = 0;
-const float Y_ZERO = 0, Y_COUNTS_PER_G = 0;
-const float Z_ZERO = 0, Z_COUNTS_PER_G = 0;
+const float X_ZERO = 2103.5, X_COUNTS_PER_G = 817.5;
+const float Y_ZERO = 2044, Y_COUNTS_PER_G = 802;
+const float Z_ZERO = 2059, Z_COUNTS_PER_G = 819;
 
 // ---- STEP 4: add your fall thresholds here ----
 const float FREEFALL_G = 0.40;
-const float IMPACT_G = 3.00;
+const float IMPACT_G = 2.50;
 const uint32_t FALL_WINDOW_MS = 500;
 
 // state used by the fall detector
@@ -65,59 +65,50 @@ void loop() {
   int yraw = analogRead(ypin);
   int zraw = analogRead(zpin);
 
-  Serial.print(xraw);
-  Serial.print(",");
-  Serial.print(yraw);
-  Serial.print(",");
-  Serial.print(zraw);
-
-  myScreen.gText(40, 40, String(xraw) + "    ", yellowColour);
-  myScreen.gText(40, 60, String(yraw) + "    ", yellowColour);
-  myScreen.gText(40, 80, String(zraw) + "    ", yellowColour);
-
   // ---- STEP 3: convert to g, compute the magnitude,
   //              send, and update the LCD ----
-  // float ax = (analogRead(xpin) - X_ZERO) / X_COUNTS_PER_G;
-  // float ay = (analogRead(xpin) - Y_ZERO) / Y_COUNTS_PER_G;
-  // float az = (analogRead(xpin) - Z_ZERO) / Z_COUNTS_PER_G;
+  float ax = (analogRead(xpin) - X_ZERO) / X_COUNTS_PER_G;
+  float ay = (analogRead(xpin) - Y_ZERO) / Y_COUNTS_PER_G;
+  float az = (analogRead(xpin) - Z_ZERO) / Z_COUNTS_PER_G;
 
-  // float mag = sqrt(ax * ax + ay * ay + az * az);
+  float mag = sqrt(ax * ax + ay * ay + az * az);
 
-  // Serial.print(ax, 3);
-  // Serial.print(",");
-  // Serial.print(ay, 3);
-  // Serial.print(",");
-  // Serial.print(az, 3);
+  Serial.print(ax, 3);
+  Serial.print(",");
+  Serial.print(ay, 3);
+  Serial.print(",");
+  Serial.print(az, 3);
 
-  // myScreen.gText(40, 40, String(ax, 2) + "    ", yellowColour);
-  // myScreen.gText(40, 60, String(ay, 2) + "    ", yellowColour);
-  // myScreen.gText(40, 80, String(az, 2) + "    ", yellowColour);
+  myScreen.gText(40, 40, String(ax, 2) + "    ", yellowColour);
+  myScreen.gText(40, 60, String(ay, 2) + "    ", yellowColour);
+  myScreen.gText(40, 80, String(az, 2) + "    ", yellowColour);
 
   // ---- STEP 4: detect free fall followed by impact ----
-  // if (mag < FREEFALL_G && !inFreeFall) {
-  //   inFreeFall = true;
-  //   freefallTime = millis();
-  // }
+  if (mag < FREEFALL_G && !inFreeFall) {
+    inFreeFall = true;
+    freefallTime = millis();
+  }
 
-  // if (inFreeFall && (millis() - freefallTime) > FALL_WINDOW_MS) {
-  //   inFreeFall = false;
-  // }
+  if (inFreeFall && (millis() - freefallTime) > FALL_WINDOW_MS) {
+    inFreeFall = false;
+  }
 
-  // if (inFreeFall && mag > IMPACT_G) {
-  //   inFreeFall = false;
-  //   fallFlag = 1; // free fall followed by impact
-  //   alertTime = millis();
-  //   beep(2000, 200); // 2 khz alert for 200ms
-  // }
+  if (inFreeFall && mag > IMPACT_G) {
+    inFreeFall = false;
+    fallFlag = 1;  // free fall followed by impact
+    alertTime = millis();
+    beep(2000, 200);  // 2 khz alert for 200ms
+  }
 
-  // if (fallFlag == 1 && (millis() - alertTime) > 2000) {
-  //   fallFlag = 0; // clear the alert after 2 seconds
-  // }
+  if (fallFlag == 1 && (millis() - alertTime) > 2000) {
+    fallFlag = 0;  // clear the alert after 2 seconds
+  }
 
-  // Serial.print(",");
-  // Serial.print(fallFlag);
+  Serial.print(",");
+  Serial.print(fallFlag);
 
-  // myScreen.gText(5, 105, fallFlag ? "** FALL **    " : "              ", redColour);
+  myScreen.gText(5, 105, fallFlag ? "** FALL **    " : "              ", redColour);
 
+  Serial.println();
   delay(sampling_period);  // ---- STEP 1: your sample interval, in ms ----
 }
