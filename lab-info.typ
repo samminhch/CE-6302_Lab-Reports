@@ -23,4 +23,8 @@
     title: "Reading the Joystick and Displaying on the LCD",
     date: datetime(day: 4, month: 9, year: 2026),
   ),
+  (
+    title: "Accelerometer Streaming, 3D Visualization and Fall Detection",
+    date: datetime(day: 11, month: 9, year: 2026),
+  ),
 )

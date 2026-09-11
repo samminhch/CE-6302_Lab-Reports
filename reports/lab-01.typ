@@ -126,8 +126,6 @@ used to convert the raw readings to a much more simpler and controlled range of
 
 #pagebreak()
 = Appendix II --- Source Code
-
-#show figure: set block(breakable: true)
 #figure(
   common.code("../labs/lab01/lab01.ino", title-full: false, lang: "cpp"),
   caption: [Source code for this laboratory---12-bit resolution],

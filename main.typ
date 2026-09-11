@@ -33,6 +33,20 @@
   instructor: course.instructor,
   teaching-assistants: course.teaching-assistants,
   course: course,
+  styles: (
+    title: (fonts: "New Computer Modern", size: 2em, weight: "bold"),
+    body: (fonts: "New Computer Modern", size: 12pt, weight: "regular"),
+    mono: (
+      fonts: ("Maple Mono NF", "Maple Mono"),
+      size: 1em,
+      weight: "regular",
+    ),
+    math: (
+      fonts: ("New Computer Modern Math"),
+      size: 1em,
+      weight: "regular",
+    ),
+  ),
   date: current-lab.date,
 )
 
@@ -41,7 +55,12 @@
   underline[#it]
 }
 #show ref: it => strong(it)
-#set heading(numbering: "1.")
+#show table.header: it => {
+  set table.cell(fill: luma(80%))
+  it
+}
+#show figure: set block(breakable: true)
+#set table(align: (x, y) => if y == 0 {center} else {left} + horizon)
 
 #{
   lab-number = if lab-number < 10 {
