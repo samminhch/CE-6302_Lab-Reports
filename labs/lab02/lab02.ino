@@ -46,7 +46,6 @@ void setup() {
 
   pinMode(buzzer, OUTPUT);
 
-
   myScreen.begin();
   myScreen.setOrientation(0);
   myScreen.clear();

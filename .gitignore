@@ -3,6 +3,9 @@
 
 result
 result/
+.devenv*
+devenv.local.nix
+devenv.local.yaml
 
 *.pdf
 *.zip
