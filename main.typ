@@ -3,62 +3,52 @@
  * + Go to `reports/lab-#.typ`
  * + Use the file explorer to view the files
  */
-
-// Change this number to switch between homework assignments
-// ...or use `typst compile --inputs lab-number=X main.typ` for parameterized compile
-#import "lab-info.typ";
-
-#let lab-number = sys.inputs.at("lab-number", default: 1)
-#if type(lab-number) == str {
-  lab-number = int(lab-number)
-}
-
-#let authors = lab-info.authors
-#let course = lab-info.course
-#let labs = lab-info.lab
-#let current-lab = labs.at(lab-number)
-
-#set document(
-  title: "[" + course.number + "." + course.section + "] " + current-lab.title,
-  author: authors.map(author => author.name),
+#let labs = (
+  (
+    title: "Example",
+    date: datetime(day: 4, month: 9, year: 2026),
+  ),
+  (
+    title: "Reading the Joystick and Displaying on the LCD",
+    date: datetime(day: 4, month: 9, year: 2026),
+  ),
+  (
+    title: "Accelerometer Streaming, 3D Visualization and Fall Detection",
+    date: datetime(day: 11, month: 9, year: 2026),
+  ),
+  (
+    title: "Continuous Motion Recognition",
+    date: datetime(day: 18, month: 9, year: 2026),
+  ),
+  (
+    title: "Audio Classification",
+    date: datetime(day: 25, month: 9, year: 2026),
+  ),
 )
 
+#let lab-number = sys.inputs.at("lab-number", default: 4)
+#let current-lab = labs.at(
+  if type(lab-number) == str {
+    int(lab-number)
+  } else { lab-number },
+)
+#let lab-number = if lab-number < 10 {
+  "0" + str(lab-number)
+} else {
+  str(lab-number)
+}
+
 #import "lib/template.typ": *
-#import "@local/templates:0.2.4": undergrad-lab-report
 #show: undergrad-lab-report.with(
-  title: current-lab.title,
-  subtitle: [Lab \##lab-number],
-  group: lab-info.group,
-  authors: authors,
-  instructor: course.instructor,
-  teaching-assistants: course.teaching-assistants,
-  course: course,
-  styles: (
-    mono: (
-      fonts: ("Maple Mono NF", "Maple Mono"),
-    ),
-  ),
+  title: [Lab #lab-number;---#current-lab.title],
+  subtitle: [EEGD-CE 6302---Embedded Systems],
+  group: "Group 01",
+  students: ("Minh Nguyen", "Noya Azeem"),
+  professor: "Tooraj Nikoubin",
+  teaching-assistant: "Saeed Hashemi",
   date: current-lab.date,
 )
 
-#show link: it => {
-  set text(fill: blue)
-  underline[#it]
-}
-#show ref: it => strong(it)
-#show table.header: it => {
-  set table.cell(fill: luma(80%))
-  it
-}
-#show figure: set block(breakable: true)
-#set table(align: (x, y) => if y == 0 {center} else {left} + horizon)
-
 #{
-  lab-number = if lab-number < 10 {
-    "0" + str(lab-number)
-  } else {
-    str(lab-number)
-  }
-
   include "reports/lab-" + lab-number + ".typ"
 }
