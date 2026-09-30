@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  uniflash,
   ...
 }:
 let
@@ -14,23 +15,56 @@ let
       target = "${dirOf source}/build/report.pdf";
     };
   };
+  helix-config = ''
+    [language-server.arduino-ls]
+    command = "${lib.getExe pkgs.arduino-language-server}"
+    args = [
+      "-clangd", "${pkgs.clang-tools}/bin/clangd",
+      "-cli", "${lib.getExe pkgs.arduino-cli}",
+      "-cli-config", "''\${ARDUINO_CONFIG_FILE:-$HOME/.arduino15/arduino-cli.yaml}",
+    ]
+
+    [language-server.harper]
+    command = "${lib.getExe pkgs.harper}"
+    args = ["--stdio"]
+
+    [language-server.devenv]
+    command = "devenv"
+    args = ["lsp"]
+
+    [[language]]
+    name = "nix"
+    language-servers = ["devenv"]
+
+
+    [[language]]
+    name = "cpp"
+    file-types = ["c", "h", "cc", "cpp", "cxx", "hpp", "hxx", "ino"]
+    roots = ["sketch.yaml", "*.ino"]
+    language-servers = ["arduino-ls", "harper"]
+
+    [[language]]
+    name = "python"
+    language-servers = ["ty", "harper"]
+
+    [[language]]
+    name = "typst"
+    language-servers = ["tinymist", "harper"]
+  '';
 in
 {
   packages = with pkgs; [
     # Arduino things
     arduino-cli
     arduino-language-server
+    clang-tools
 
-
-    clang-tools # provides clangd for arduino-language-server
+    # ESP32 things
+    esptool
 
     # python
     ty
     ruff
-    python314Packages.tkinter
-    python314Packages.pyserial
-    python314Packages.numpy
-
     harper
 
     # devenv-specific
@@ -46,31 +80,7 @@ in
   enterShell = ''
     mkdir -p .helix
     cat > .helix/languages.toml <<EOF
-    [language-server.arduino-ls]
-    command = "${lib.getExe pkgs.arduino-language-server}"
-    args = [
-      "-clangd", "${pkgs.clang-tools}/bin/clangd",
-      "-cli", "${lib.getExe pkgs.arduino-cli}",
-      "-cli-config", "''\${ARDUINO_CONFIG_FILE:-$HOME/.arduino15/arduino-cli.yaml}",
-    ]
-
-    [language-server.harper]
-    command = "${lib.getExe pkgs.harper}"
-    args = ["--stdio"]
-
-    [[language]]
-    name = "cpp"
-    file-types = ["c", "h", "cc", "cpp", "cxx", "hpp", "hxx", "ino"]
-    roots = ["sketch.yaml", "*.ino"]
-    language-servers = ["arduino-ls", "harper"]
-
-    [[language]]
-    name = "python"
-    language-servers = ["ty", "harper"]
-
-    [[language]]
-    name = "typst"
-    language-servers = ["tinymist", "harper"]
+    ${helix-config}
     EOF
   '';
   languages = {
@@ -87,13 +97,30 @@ in
     };
     python = {
       enable = true;
-      package = pkgs.python3.withPackages (ps: [ ps.tkinter ]);
-      # venv = {
-      #   enable = true;
-      #   requirements = ./requirements.txt;
-      # };
+      package = pkgs.python3.withPackages (ps: [
+        ps.tkinter
+        ps.pyserial
+        ps.numpy
+      ]);
     };
-    nix.enable = true;
+    javascript = {
+      enable = true;
+      npm.enable = true;
+    };
+  };
+  scripts = {
+    flash-esp32.exec = ''
+        ${lib.getExe pkgs.esptool} \
+        -b 460800 \
+        write_flash 0x0 ${./firmware/espressif-esp32/firmware_esp32.bin}
+      '';
+    flash-tilaunchxl.exec = ''
+        ${uniflash}/bin/dslite \
+          -c ${./firmware/ti-launchxl/user_files/configs/cc1352p1f3.ccxml} \
+          -l ${./firmware/ti-launchxl/user_files/settings/generated.ufsettings} \
+          -e -f -v \
+          ${./firmware/ti-launchxl/edge_impulse_firmware.out}
+      '';
   };
   tasks = {
     "watch:notes".exec = ''

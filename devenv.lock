@@ -3,11 +3,11 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1787580466,
-        "narHash": "sha256-ZKMRsyFvqoT7m6ZTMWV7fhJJO2eh+CYNFmYEOZiTW3Q=",
+        "lastModified": 1789340509,
+        "narHash": "sha256-It2AD16uFwiAe9GvuLbk+j+qTDrQxT3XPclL71ZnJ3I=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "d4c0415ac395b04be989b58c3a33c826a4741e54",
+        "rev": "6e830506b517d6a373f2dec6ee8c7f4683908856",
         "type": "github"
       },
       "original": {
@@ -19,11 +19,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1787394516,
-        "narHash": "sha256-pRGOQSClnXNI2iLUG6DYpsGvYcuw0drOutVZFTJNw90=",
+        "lastModified": 1789370336,
+        "narHash": "sha256-6RSEDHIWQtesQKWSu5qRai8L2h4KgCgMEfJHstW99G4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c8f90650c15282fa8656a041bfbbd2403997a9a7",
+        "rev": "c7def046b9a883d46974757852106483d741586f",
         "type": "github"
       },
       "original": {
@@ -33,10 +33,45 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1789921291,
+        "narHash": "sha256-Ft/BRnIqw1MywFoXydKobjjWmDFgDdYtSpJliE8+yUw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "44a91898084f46797b5fac650c7e8c9ac38c43d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "devenv": "devenv",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "uniflash": "uniflash"
+      }
+    },
+    "uniflash": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1790745537,
+        "narHash": "sha256-Ag23xD8JGEj1gYAY91MNYBOwunNNu7ePS2Slbk2sZwU=",
+        "ref": "refs/heads/main",
+        "rev": "e2d8f52f34d70a73834df4ace04d63dfac67a362",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://codeberg.org/samminhch/uniflash"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/samminhch/uniflash"
       }
     }
   },

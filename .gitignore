@@ -1,5 +1,6 @@
 /build/
-/.helix/
+*.helix/
+/node_modules
 
 result
 result/
