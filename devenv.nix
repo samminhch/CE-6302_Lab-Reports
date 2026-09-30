@@ -1,7 +1,7 @@
 {
+  inputs,
   pkgs,
   lib,
-  uniflash,
   ...
 }:
 let
@@ -15,6 +15,9 @@ let
       target = "${dirOf source}/build/report.pdf";
     };
   };
+
+  uniflash = inputs.uniflash.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
   helix-config = ''
     [language-server.arduino-ls]
     command = "${lib.getExe pkgs.arduino-language-server}"
@@ -115,7 +118,7 @@ in
         write_flash 0x0 ${./firmware/espressif-esp32/firmware_esp32.bin}
       '';
     flash-tilaunchxl.exec = ''
-        ${uniflash}/bin/dslite \
+        ${lib.getExe' uniflash "dslite"} \
           -c ${./firmware/ti-launchxl/user_files/configs/cc1352p1f3.ccxml} \
           -l ${./firmware/ti-launchxl/user_files/settings/generated.ufsettings} \
           -e -f -v \

@@ -4,3 +4,6 @@ inputs:
     url: github:NixOS/nixpkgs/nixpkgs-unstable
   uniflash:
     url: git+https://codeberg.org/samminhch/uniflash
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
