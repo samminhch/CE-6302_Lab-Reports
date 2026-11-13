@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -16,8 +15,6 @@ let
     };
   };
 
-  uniflash = inputs.uniflash.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
   helix-config = ''
     [language-server.arduino-ls]
     command = "${lib.getExe pkgs.arduino-language-server}"
@@ -26,6 +23,10 @@ let
       "-cli", "${lib.getExe pkgs.arduino-cli}",
       "-cli-config", "''\${ARDUINO_CONFIG_FILE:-$HOME/.arduino15/arduino-cli.yaml}",
     ]
+
+    [language-server.clangd]
+    command = "${pkgs.clang-tools}/bin/clangd"
+    args = ["--query-driver=${pkgs.gcc-arm-embedded}/bin/arm-none-eabi-*"]
 
     [language-server.harper]
     command = "${lib.getExe pkgs.harper}"
@@ -39,10 +40,14 @@ let
     name = "nix"
     language-servers = ["devenv"]
 
+    [[language]]
+    name = "c"
+    file-types = ["c", "h"]
+    language-servers = ["clangd", "harper"]
 
     [[language]]
     name = "cpp"
-    file-types = ["c", "h", "cc", "cpp", "cxx", "hpp", "hxx", "ino"]
+    file-types = ["cc", "cpp", "cxx", "hpp", "hxx", "ino"]
     roots = ["sketch.yaml", "*.ino"]
     language-servers = ["arduino-ls", "harper"]
 
@@ -56,21 +61,20 @@ let
   '';
 in
 {
+  imports = [
+    ./nix/arduino.nix
+    ./nix/edge-impulse.nix
+    ./nix/msp432.nix
+  ];
+
   packages = with pkgs; [
-    # Arduino things
-    arduino-cli
-    arduino-language-server
-    clang-tools
-
-    # ESP32 things
-    esptool
-
     # python
     ty
     ruff
     harper
 
     # devenv-specific
+    git-lfs
     yaml-language-server
     nixfmt
 
@@ -78,14 +82,16 @@ in
     font-awesome
     fira-math
     maple-mono.NF
-    (google-fonts.override { fonts = [ "Fredoka" ]; })
   ];
+
   enterShell = ''
-    mkdir -p .helix
-    cat > .helix/languages.toml <<EOF
+    git lfs install --local
+    mkdir -p "$DEVENV_ROOT/.helix"
+    cat > "$DEVENV_ROOT/.helix/languages.toml" <<EOF
     ${helix-config}
     EOF
   '';
+
   languages = {
     typst = {
       enable = true;
@@ -94,8 +100,6 @@ in
       fontPaths = [
         "${pkgs.google-fonts}/share/fonts/truetype"
         "${pkgs.maple-mono.NF}/share/fonts/truetype"
-        "${pkgs.font-awesome_7}/share/fonts/opentype"
-        "${pkgs.fira-math}/share/fonts/opentype"
       ];
     };
     python = {
@@ -106,25 +110,8 @@ in
         ps.numpy
       ]);
     };
-    javascript = {
-      enable = true;
-      npm.enable = true;
-    };
   };
-  scripts = {
-    flash-esp32.exec = ''
-        ${lib.getExe pkgs.esptool} \
-        -b 460800 \
-        write_flash 0x0 ${./firmware/espressif-esp32/firmware_esp32.bin}
-      '';
-    flash-tilaunchxl.exec = ''
-        ${lib.getExe' uniflash "dslite"} \
-          -c ${./firmware/ti-launchxl/user_files/configs/cc1352p1f3.ccxml} \
-          -l ${./firmware/ti-launchxl/user_files/settings/generated.ufsettings} \
-          -e -f -v \
-          ${./firmware/ti-launchxl/edge_impulse_firmware.out}
-      '';
-  };
+
   tasks = {
     "watch:notes".exec = ''
       mkdir -p ${dirOf paths.notes.target}
@@ -140,5 +127,6 @@ in
       '';
     };
   };
+
   unsetEnvVars = [ "SOURCE_DATE_EPOCH" ];
 }

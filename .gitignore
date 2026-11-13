@@ -1,6 +1,6 @@
-/build/
+build/
 *.helix/
-/node_modules
+.clangd
 
 result
 result/

@@ -1,10 +1,13 @@
 EOT
 Eeff
+LFXT
 Matthiessan
 NBTI
 PBTI
+PJSEL
 Transconductance
 Vg
+WDT
 dopants
 filter-only-floats
 flatband
