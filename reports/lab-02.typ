@@ -9,6 +9,7 @@
 #show: codly-init
 #codly(languages: codly-languages, lang-format: none)
 
+#common.title[Lab 02---Accelerometer Streaming, 3D Visualization and Fall Detection]
 
 = Introduction
 The objective of this lab was to make us familiar with the three-axis analog
@@ -171,7 +172,17 @@ We observed that the final threshold was $2.5g$. At this setting we were able to
 In conclusion this experiment emphasized on how the complete measurement happened from analog acceleration to a live 3D visualization and how to detect an event. We observed uncalibrated and calibrated data which showed that calibration removed the channel offsets and converted the ADC counts into physical units that basically allowed the stationary vector magnitude to remain close to 1g while making it remain stationary or flat and tilting it to see the g value across various orientations. We were also able to see that how changing the sampling rate from 2Hz to 50Hz gave us enough temporal resolution to help us observe the approximately $0.175"s"$ free fall interval. We were able to see that how a low magnitude condition followed by an impact reduced the false alarms and compared this by repeating the event. Finally, we were able to detect 3 out 5 falls and 1 false detection in 10 seconds while ordinary handling and all this occurred at an impact threshold of $2.5g$.
 
 #pagebreak()
-= Appendix I --- Source Code
+= Appendix I---Use of Large Language Models
+#table(
+  stroke: none,
+  inset: (left: 0pt, right: 1em),
+  columns: 3,
+  [Was an LLM used for this project?],
+  [#sym.square.stroked.big Yes],
+  [#sym.ballot.check No],
+)
+
+= Appendix II---Source Code
 #figure(
   common.code("../labs/lab02/lab02.ino", title-full: false, lang: "cpp"),
   caption: [Arduino sketch that reads and calculates acceleration],

@@ -24,9 +24,29 @@
     title: "Audio Classification",
     date: datetime(day: 25, month: 9, year: 2026),
   ),
+  (
+    title: "Image Classification",
+    date: datetime(day: 2, month: 10, year: 2026),
+  ),
+  (
+    title: "Signal Classification",
+    date: datetime(day: 9, month: 10, year: 2026),
+  ),
+  (
+    title: "Timer Practice for MSP-EXP432P401R Launchpad",
+    date: datetime(day: 16, month: 10, year: 2026),
+  ),
+  (
+    title: "UART Communication between two MSP432 boards",
+    date: datetime(day: 29, month: 10, year: 2026),
+  ),
+  (
+    title: "SPI Communication between two MSP432 boards",
+    date: datetime(day: 06, month: 11, year: 2026)
+  )
 )
 
-#let lab-number = sys.inputs.at("lab-number", default: 4)
+#let lab-number = sys.inputs.at("lab-number", default: 9)
 #let current-lab = labs.at(
   if type(lab-number) == str {
     int(lab-number)

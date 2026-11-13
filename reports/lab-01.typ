@@ -1,6 +1,3 @@
-#import "@preview/cheq:0.4.0": checklist
-#show: checklist
-
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.10": *
 
@@ -8,6 +5,8 @@
 #codly(languages: codly-languages, lang-format: none)
 
 #import "common.typ"
+
+#common.title[Lab 01---Reading the Joystick and Displaying on the LCD]
 
 = Introduction
 The objective of this lab was to make us familiar with the MSP432 board and BoosterPack. The main goal was to read the analog axes x and y of the BoosterPack joystick with the MSP432P401R ADC which is analog to digital converter. We then had to display live readings on the LCD and convert those readings to a smaller 0-9 range and contain those values within the given ranges. The lab also emphasized how changing the ADC resolution from 10-bit to 12-bit and further to 14-bit affected the numerical readings. It was to be observed how each of the joystick axis was acting like a potentiometer which produced a voltage between 0V-3.3V. The intention was to see that with the 12-bit resolution the ADC divided the range using the formula $2^n$ that is mathematically $2^12 = 4096$ levels and the analog would give range from 0 to 4095. The use of the ```cpp map()``` function was established that how function linearly rescaled the selected raw range to a fine tune range of 0 to 9. The use of ```cpp constrain()``` function was established that how it eliminated any mapped result that was outside of this range which would be below 0 or above 9. The target was to see howe increasing or decreasing the resolution changed the available levels so 10-bit gives us 1024 levels, 12-bit gives us 4096 levels, and 14-bit gives us 16384 levels.
@@ -50,15 +49,18 @@ The lab helped us successfully understand how joystick movement can be observed 
 #set heading(numbering: none)
 
 #pagebreak()
-= Appendix I --- Use of Large Language Models
+= Appendix I---Use of Large Language Models
 #table(
   stroke: none,
+  inset: (left: 0pt, right: 1em),
   columns: 3,
-  [*Was an LLM used for this project?*], [- [ ] Yes], [- [x] No],
+  [Was an LLM used for this project?],
+  [#sym.square.stroked.big Yes],
+  [#sym.ballot.check No],
 )
 
 #pagebreak()
-= Appendix II --- Source Code
+= Appendix II---Source Code
 #figure(
   common.code("../labs/lab01/lab01.ino", title-full: false, lang: "cpp"),
   caption: [Source code for this laboratory---12-bit resolution],

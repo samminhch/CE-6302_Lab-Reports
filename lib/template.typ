@@ -56,14 +56,13 @@
     divider()
   })
 
-  align(center, text(size: 19pt, weight: "bold", title))
 
   set par(justify: true)
-  set heading(numbering: "1")
+  set heading(numbering: "1.")
   show heading: it => {
     set text(size: if it.level == 1 { 18pt } else { 14pt })
     if (
-      it.level == 2
+      it.level >= 2
         or it
           .body
           .fields()

@@ -1,4 +1,7 @@
 #import "@preview/subpar:0.2.2"
+#import "common.typ": title
+
+#title[Lab 04---Audio Classification]
 
 = Introduction
 The objective of this slab was to develop a TinyML audio classification system using Edge Impulse and LaunchPad. The system was created to first collect audio data using a microphone then extract the useful parts from it an ignore the noise. Then we used the useful audio signal to train a neural classified and then test the model using the previously unseen audio. We then finally deployed the trained model back onto the LaunchPad. We were made to understand that how TinyML made it possible to perform machine learning inference directly onto a low power embedded system device rather than relying on cloud processing alone.
@@ -104,14 +107,13 @@ In conclusion we used Edge Impulse and LaunchPad to create a TinyML audio classi
 
 #pagebreak()
 = Appendix I---Use of Large Language Models
-#import "@preview/cheq:0.4.0": checklist
-#show: checklist
 #table(
-  align: top,
   stroke: none,
   inset: (left: 0pt, right: 1em),
   columns: 3,
-  [*Was an LLM used for this project?*], [- [ ] Yes], [- [x] No],
+  [Was an LLM used for this project?],
+  [#sym.square.stroked.big Yes],
+  [#sym.ballot.check No],
 )
 
 = Appendix II---Edge Impulse Machine Learning Model

@@ -1,4 +1,6 @@
 #import "@preview/subpar:0.2.2"
+#import "common.typ": title
+#title[Lab 03---Continuous Motion Recognition]
 
 = Introduction
 This lab helped us build and understand how continuous motion recognition works
@@ -135,14 +137,13 @@ power embedded system platform.
 
 #pagebreak()
 = Appendix I---Use of Large Language Models
-#import "@preview/cheq:0.4.0": checklist
-#show: checklist
-
 #table(
-  columns: 3,
   stroke: none,
-  align: top,
-  [*Was an LLM used for this project?*], [- [ ] Yes], [- [x] No],
+  inset: (left: 0pt, right: 1em),
+  columns: 3,
+  [Was an LLM used for this project?],
+  [#sym.square.stroked.big Yes],
+  [#sym.ballot.check No],
 )
 
 = Appendix II---Edge Impulse Machine Learning Model

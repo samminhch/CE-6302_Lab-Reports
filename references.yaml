@@ -1,56 +1,11 @@
-lab-manual-1:
-  type: Misc
-  title: "CE-4204 Lab #1 Manual"
-  organization: "University of Texas at Dallas"
-  date: 2026-02-13
-  note: "Accessed via Blackboard eLearning"
-
-lab-manual-2:
-  type: Misc
-  title: "CE-4204 Lab #2 Manual"
-  organization: "University of Texas at Dallas"
-  date: 2026-02-27
-  note: "Accessed via Blackboard eLearning"
-  
-lab-manual-3:
-  type: Misc
-  title: "CE-4204 Lab #3 Manual"
-  organization: "University of Texas at Dallas"
-  date: 2026-03-06
-  note: "Accessed via Blackboard eLearning"
-  
-lab-manual-4:
-  type: Misc
-  title: "CE-4204 Lab #4 Manual"
-  organization: "University of Texas at Dallas"
-  date: 2026-03-13
-  note: "Accessed via Blackboard eLearning"
-
-lab-manual-5:
-  type: Misc
-  title: "CE-4204 Lab #5 Manual"
-  organization: "University of Texas at Dallas"
-  date: 2026-03-20
-  note: "Accessed via Blackboard eLearning"
-
-datasheet-3n163-3n164:
-    type: Report
-    title: 3N163/3N164 P-Channel Enhancement-Mode MOSFET Transistors
-    organization: Siliconix
-    date: 1994-07-04
-    serial-number: "P-37404 Rev. D"
-    url:
-        value: https://media.digikey.com/pdf/Data%20Sheets/Vishay%20Siliconix%20PDFs/3N163,3N164.pdf
-        date: 2026-02-25
-
-entner-img329:
-  type: Artwork
-  title: "Energy Diagram of a Pb Center at the Si/SiO2 Interface"
-  author: R. Entner
-  url: https://www.iue.tuwien.ac.at/phd/entner/img329.png
-  parent:
-    type: Web
-    title: "3.1 Silicon Dangling Bonds"
-    url: https://www.iue.tuwien.ac.at/phd/entner/node14.html
-    author: R. Entner
-    date: 2009-12-7
+yogeswar_reddy_thota_2025:
+  type: misc
+  title: 'TinyML_ECG_Data (Revision 8223467)'
+  author: Thota, Yogeswar Reddy
+  date: 2024-05-26
+  publisher: Hugging Face
+  url: 
+    value: https://huggingface.co/datasets/Yogeswar/TinyML_ECG_Data
+    date: 2026-10-09
+  serial-number:
+    doi: ' 10.57967/hf/5913'

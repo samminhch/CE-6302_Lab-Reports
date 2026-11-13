@@ -1,20 +1,15 @@
+#import "common": title
 #import "@preview/cheq:0.4.0": checklist
 #show: checklist
 #set table(fill: none)
 
+#title[Example]
+
 = Introduction
 
-The objective of this lab was to implement an LED dimmer on the TM4C123
-Launchpad. A potentiometer voltage is sampled by the on-chip ADC, the result
-sets the duty cycle of a PWM signal driving an LED, and the sampled value is
-sent to a host PC over UART at 115200 Bd.
+The objective of this lab was to implement an LED dimmer on the TM4C123 Launchpad. A potentiometer voltage is sampled by the on-chip ADC, the result sets the duty cycle of a PWM signal driving an LED, and the sampled value is sent to a host PC over UART at 115200 Bd.
 
-The 12-bit ADC is referenced to $3.3 V$, so an input voltage Vin produces the
-code $N = (V_"in" / 3.3) × 4095$. The PWM signal has an average value
-$V_"avg" = D times V_"DD"$, where the duty cycle $D$ is the ratio of the compare
-value to the counter load value. Conversions are triggered by `Timer0A` rather
-than by software, so the sampling interval stays fixed no matter what the main
-loop is doing
+The 12-bit ADC is referenced to $3.3 V$, so an input voltage Vin produces the code $N = (V_"in" / 3.3) × 4095$. The PWM signal has an average value $V_"avg" = D times V_"DD"$, where the duty cycle $D$ is the ratio of the compare value to the counter load value. Conversions are triggered by `Timer0A` rather than by software, so the sampling interval stays fixed no matter what the main loop is doing
 
 = Procedure
 
@@ -70,8 +65,11 @@ The LED dimmer was implemented and verified across the full input range, with th
 
 #table(
   stroke: none,
+  inset: (left: 0pt, right: 1em),
   columns: 3,
-  [*Was an LLM used for this project?*], [- [ ] Yes], [- [ ] No],
+  [Was an LLM used for this project?],
+  [#sym.ballot.check Yes],
+  [#sym.square.stroked.big No],
 )
 
 #table(
