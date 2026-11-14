@@ -38,20 +38,24 @@
   ),
   (
     title: "UART Communication between two MSP432 boards",
-    date: datetime(day: 29, month: 10, year: 2026),
+    date: datetime(day: 23, month: 10, year: 2026),
   ),
   (
     title: "SPI Communication between two MSP432 boards",
-    date: datetime(day: 06, month: 11, year: 2026)
+    date: datetime(day: 30, month: 10, year: 2026)
+  ),
+  (
+    title: [I#super[2]C Communication between the TI MSP432 and Adafruit PCF8523],
+    date: datetime(day: 6, month: 11, year: 2026)
+  ),
+  (
+    title: "Low Power Mode, WDT, and EnergyTrace+",
+    date: datetime(day: 13, month: 11, year: 2026)
   )
 )
 
-#let lab-number = sys.inputs.at("lab-number", default: 9)
-#let current-lab = labs.at(
-  if type(lab-number) == str {
-    int(lab-number)
-  } else { lab-number },
-)
+#let lab-number = int(sys.inputs.at("lab-number", default: 9))
+#let current-lab = labs.at(lab-number)
 #let lab-number = if lab-number < 10 {
   "0" + str(lab-number)
 } else {

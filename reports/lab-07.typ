@@ -224,3 +224,8 @@ In conclusion this lab helped us to grasp how `Timer_A0` PWM generation uses six
 
 #pagebreak()
 = Appendix II---Source Code
+
+#figure(
+  common.code("../labs/arduino/lab07/lab07.ino", title-full: false, lang: "cpp"),
+  caption: [Timer Practice Source Code],
+)<listing:source-code>

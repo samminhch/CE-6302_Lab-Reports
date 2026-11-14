@@ -67,7 +67,6 @@ Screen_HX8353E myScreen;
 //      P2->SEL0, P2->SEL1   SEL0=1, SEL1=0 -> pin is used by Timer_A0 (TA0.2)
 //      Configure only BIT5; do not disturb the other Port 2 pins.
 
-
 /* =====================================================================
  *  STEP 0  -  SAMPLE  (finished)  5 Hz, 50 %, UP mode, OUTMOD 7
  *  Read every line. Steps 1-6 use exactly the same 6 parts.
@@ -105,7 +104,6 @@ void step0(void) {
   // 6) start: ACLK, UP mode, clear the count
   TIMER_A0->CTL = UP | ACLK | TIMER_A_CTL_CLR;
 }
-
 
 /* =====================================================================
  *  STEP 1  -  goal 10 Hz, 50 %   |  UP mode, OUTMOD 7

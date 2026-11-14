@@ -1,9 +1,14 @@
+Adafruit
 EOT
+EXP432P401R
 Eeff
 LFXT
+MSP
+MSP432
 Matthiessan
 NBTI
 PBTI
+PCF8523
 PJSEL
 Transconductance
 Vg

@@ -1,6 +1,9 @@
 #import "common.typ"
 #import "@preview/unify:0.8.1": qty, num
 
+#import "@preview/zebraw:0.6.3": zebraw
+#show: zebraw
+
 #let pct(n) = qty(n, "%")
 
 #common.title[Lab 08---UART Communication between two MSP432 boards]
@@ -94,11 +97,11 @@ In conclusion the given programs implemented the UART-based RGB LED control syst
 #pagebreak()
 = Appendix II---UART Source Code
 
-// #figure(
-//   common.code("../labs/msp432/uart-transmitter.c", title-full: false, lang: "c"),
-//   caption: [UART transmitter source code],
-// )<listing:uart-transmitter>
-// #figure(
-//   common.code("../labs/msp432/uart-receiver.c", title-full: false, lang: "c"),
-//   caption: [UART receiver source code],
-// )<listing:uart-receiver>
+#figure(
+  common.code("../labs/msp432/uart-transmitter.c", title-full: false, lang: "c"),
+  caption: [UART transmitter source code],
+)<listing:uart-transmitter>
+#figure(
+  common.code("../labs/msp432/uart-receiver.c", title-full: false, lang: "c"),
+  caption: [UART receiver source code],
+)<listing:uart-receiver>

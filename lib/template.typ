@@ -91,7 +91,7 @@
     })
   }
 
-  show raw: set text(font: "Maple Mono", size: 10pt)
+  show raw: set text(font: ("Maple Mono NF", "Maple Mono"), size: 10pt)
 
   show link: it => {
     set text(fill: blue)

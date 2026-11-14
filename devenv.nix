@@ -5,12 +5,8 @@
 }:
 let
   paths = {
-    notes = rec {
-      source = "./notes/main.typ";
-      target = "${dirOf source}/build/CE-6302_notes.pdf";
-    };
     report = rec {
-      source = "./reports/main.typ";
+      source = "./main.typ";
       target = "${dirOf source}/build/report.pdf";
     };
   };
@@ -113,17 +109,12 @@ in
   };
 
   tasks = {
-    "watch:notes".exec = ''
-      mkdir -p ${dirOf paths.notes.target}
-      touch ${paths.notes.target}
-      typst watch ${paths.notes.source} ${paths.notes.target}
-    '';
     "watch:report" = {
       exec = ''
         mkdir -p ${dirOf paths.report.target}
         touch ${paths.report.target}
-        LAB_NUM=$(echo $DEVENV_TASK_INPUT | ${lib.getExe pkgs.jq} .[\"lab-number\"])
-        typst watch ${paths.report.source} ${paths.report.target} --input lab-number=$LAB_NUM
+        LAB_NUM=$(printf '%s' "''${DEVENV_TASK_INPUT:-}" | ${lib.getExe pkgs.jq} -r '.["lab-number"] // empty')
+        typst watch ${paths.report.source} ${paths.report.target} ''${LAB_NUM:+--input lab-number="$LAB_NUM"}
       '';
     };
   };
